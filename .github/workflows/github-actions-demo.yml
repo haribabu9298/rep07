@@ -11,4 +11,9 @@ jobs:
       - run: docker login -u haribabu9298@gmail.com -p Hari@fb123
       - run: docker build . -t haribabu9298/python-test:1
       - run: docker push haribabu9298/python-test:1
+      - run: |
+          sshpass -p jenkins@123 ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o Preferredauthentications=password jenkins@10.78.102.125 'bash -s' <<EOF    
+                  docker login -u haribabu9298@gmail.com -p Hari@fb123
+                  docker pull haribabu9298/python-test:1
+          EOF
       - run: echo "🍏 This job's status is ${{ job.status }}."
